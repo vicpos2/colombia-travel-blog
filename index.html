@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Colombia Travel Bucket List | Cartagena de Indias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --dark: #1A1207;
+      --cream: #F5EDD6;
+      --teal: #1B6B72;
+      --coral: #D9603B;
+      --sand: #E8D5A3;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--dark);
+      color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(26, 18, 7, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav ul a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    nav ul a:hover { opacity: 1; color: var(--gold); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      background:
+        linear-gradient(to bottom, rgba(26,18,7,0.45) 0%, rgba(26,18,7,0.80) 100%),
+        url('https://picsum.photos/seed/cartagena/1600/900') center/cover no-repeat;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+
+    .hero-title span { color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s forwards;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s forwards;
+    }
+
+    .hero-cta:hover { background: var(--gold); color: var(--dark); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(245,237,214,0.5);
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: pulse 1.8s infinite;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 2rem; }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      line-height: 1.15;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 2.5rem;
+    }
+
+    p { font-size: 1rem; line-height: 1.9; color: rgba(245,237,214,0.85); margin-bottom: 1.2rem; }
+
+    /* ── EXPERIENCE ── */
+    #experience {
+      background: linear-gradient(135deg, #1A1207 60%, #12302E 100%);
+    }
+
+    .quote-block {
+      border-left: 3px solid var(--gold);
+      padding: 1rem 2rem;
+      margin: 2rem 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--sand);
+      background: rgba(201,168,76,0.06);
+    }
+
+    /* ── WHERE TO GO ── */
+    #places { background: #111008; }
+
+    .places-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .place-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(201,168,76,0.04);
+      padding: 2rem 1.5rem;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .place-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+
+    .place-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: rgba(201,168,76,0.15);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .place-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .place-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(245,237,214,0.75);
+      margin-bottom: 0;
+    }
+
+    .place-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1.2rem;
+      filter: brightness(0.85) saturate(1.1);
+      transition: filter 0.3s;
+    }
+
+    .place-card:hover .place-img { filter: brightness(1) saturate(1.2); }
+
+    /* ── PHOTO GALLERY ── */
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin: 2rem 0;
+    }
+
+    .photo-gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      filter: brightness(0.85) saturate(1.1);
+      transition: filter 0.3s, transform 0.3s;
+    }
+
+    .photo-gallery img:hover {
+      filter: brightness(1) saturate(1.3);
+      transform: scale(1.02);
+    }
+
+    .photo-gallery img:first-child {
+      grid-column: span 2;
+      height: 260px;
+    }
+
+    @media (max-width: 600px) {
+      .photo-gallery { grid-template-columns: 1fr 1fr; }
+      .photo-gallery img:first-child { grid-column: span 2; }
+    }
+
+    /* ── ACTIVITIES ── */
+    #activities {
+      background: linear-gradient(180deg, #111008 0%, #0E2520 100%);
+    }
+
+    .activities-list {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(201,168,76,0.15);
+      transition: border-color 0.3s;
+    }
+
+    .activity-item:hover { border-color: var(--gold); }
+
+    .activity-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .activity-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .activity-text p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      color: rgba(245,237,214,0.75);
+    }
+
+    /* ── TIPS ── */
+    #tips { background: #0E2520; }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .tip-card {
+      background: rgba(255,255,255,0.03);
+      border-top: 2px solid var(--gold);
+      padding: 1.5rem;
+      transition: background 0.3s;
+    }
+
+    .tip-card:hover { background: rgba(201,168,76,0.07); }
+
+    .tip-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .tip-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(245,237,214,0.75);
+      margin-bottom: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      text-align: center;
+      padding: 2.5rem;
+      font-size: 0.8rem;
+      color: rgba(245,237,214,0.4);
+      letter-spacing: 2px;
+    }
+
+    footer span { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Colombia ✦ Bucket List</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#experience">My Experience</a></li>
+      <li><a href="#places">Where to Go</a></li>
+      <li><a href="#activities">What to Do</a></li>
+      <li><a href="#tips">Travel Tips</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO / HOME -->
+  <section id="home">
+    <p class="hero-eyebrow">Colombia Travel Bucket List</p>
+    <h1 class="hero-title">Cartagena<br/><span>de Indias</span></h1>
+    <p class="hero-sub">Where history meets the Caribbean Sea</p>
+    <a href="#experience" class="hero-cta">Begin the Journey</a>
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <!-- MY TRAVEL EXPERIENCE -->
+  <section id="experience">
+    <div class="section-inner">
+      <p class="section-label reveal">Personal Story</p>
+      <h2 class="section-title reveal">My Travel<br/>Experience</h2>
+      <div class="divider reveal"></div>
+
+      <p class="reveal">
+        Last year, I traveled to Cartagena de Indias with my family, and it turned out to be one of the most unforgettable trips of my life. We set off early in the morning and arrived at the walled city by noon. The first thing I noticed was the colorful architecture of the old town — every street looked like a painting.
+      </p>
+
+      <div class="quote-block reveal">
+        "We walked through the historic center and visited the Castillo de San Felipe de Barajas, a massive fortress that once protected the city from pirates."
+      </div>
+
+      <p class="reveal">
+        Our guide explained the history in detail, and I was completely fascinated. In the evenings, we tried fresh seafood at a local restaurant near the port and watched the sunset over the Caribbean Sea.
+      </p>
+      <p class="reveal">
+        On the last day, we took a boat trip to the Islas del Rosario, where the water was so crystal-clear that I could see the colorful fish swimming beneath the surface. I swam, snorkeled, and completely forgot about my worries. When we finally headed back home, I felt refreshed and deeply grateful for the experience. Visiting Cartagena showed me how rich and beautiful Colombia's history and natural landscapes truly are.
+      </p>
+
+      <div class="photo-gallery reveal">
+        <img src="https://picsum.photos/seed/cartagena1/900/500" alt="Cartagena de Indias"/>
+        <img src="https://picsum.photos/seed/cartagena2/600/400" alt="Ciudad Amurallada"/>
+        <img src="https://picsum.photos/seed/cartagena3/600/400" alt="Mar Caribe"/>
+        <img src="https://picsum.photos/seed/cartagena4/600/400" alt="Atardecer Cartagena"/>
+      </div>
+    </div>
+  </section>
+  <section id="places">
+    <div class="section-inner">
+      <p class="section-label reveal">Destinations</p>
+      <h2 class="section-title reveal">Where to Go</h2>
+      <div class="divider reveal"></div>
+      <p class="reveal">Cartagena has several must-visit places that will leave you speechless. Here are the top spots you should not miss:</p>
+
+      <div class="places-grid">
+        <div class="place-card reveal">
+          <img class="place-img" src="https://picsum.photos/seed/ciudad/600/300" alt="Ciudad Amurallada"/>
+          <div class="place-num">01</div>
+          <div class="place-name">Ciudad Amurallada</div>
+          <p class="place-desc">The walled Old City is a UNESCO World Heritage Site. Walk along the historic walls, admire colonial architecture, and soak in centuries of Caribbean history.</p>
+        </div>
+        <div class="place-card reveal">
+          <img class="place-img" src="https://picsum.photos/seed/castillo/600/300" alt="Castillo de San Felipe"/>
+          <div class="place-num">02</div>
+          <div class="place-name">Castillo de San Felipe</div>
+          <p class="place-desc">One of the most impressive Spanish fortresses in the Americas, built to defend the city from pirate attacks. The views from the top are absolutely breathtaking.</p>
+        </div>
+        <div class="place-card reveal">
+          <img class="place-img" src="https://picsum.photos/seed/islas/600/300" alt="Islas del Rosario"/>
+          <div class="place-num">03</div>
+          <div class="place-name">Islas del Rosario</div>
+          <p class="place-desc">A stunning archipelago about 35 km from the city with beautiful coral reefs, perfect for snorkeling and diving in crystal-clear Caribbean waters.</p>
+        </div>
+        <div class="place-card reveal">
+          <img class="place-img" src="https://picsum.photos/seed/bocagrande/600/300" alt="Bocagrande"/>
+          <div class="place-num">04</div>
+          <div class="place-name">Bocagrande</div>
+          <p class="place-desc">The modern beach neighborhood where tourists can relax by the sea, enjoy fresh fruit cocktails, and watch the vibrant city life pass by.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT TO DO -->
+  <section id="activities">
+    <div class="section-inner">
+      <p class="section-label reveal">Activities</p>
+      <h2 class="section-title reveal">What to Do</h2>
+      <div class="divider reveal"></div>
+      <p class="reveal">There are countless activities to enjoy in Cartagena. Here are the experiences you must not miss:</p>
+
+      <div class="activities-list">
+        <div class="activity-item reveal">
+          <div class="activity-icon">🚤</div>
+          <div class="activity-text">
+            <h3>Boat Trip to Islas del Rosario</h3>
+            <p>You should take a boat trip to go snorkeling or scuba diving in the beautiful coral reefs. The turquoise water is unlike anything you have ever seen.</p>
+          </div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="activity-icon">🏰</div>
+          <div class="activity-text">
+            <h3>Guided Tour of the Old City</h3>
+            <p>You could join a guided tour of the walled city to learn about its fascinating colonial history and discover hidden courtyards full of tropical flowers.</p>
+          </div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="activity-icon">💃</div>
+          <div class="activity-text">
+            <h3>Salsa Dancing</h3>
+            <p>If you enjoy dancing, you must try a salsa lesson in the evening — Cartagena has a vibrant nightlife scene that you will absolutely love.</p>
+          </div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="activity-icon">🍤</div>
+          <div class="activity-text">
+            <h3>Street Food Tasting</h3>
+            <p>Tasting local street food such as arepa de huevo and fried fish is an experience you cannot miss. The flavors are bold, fresh, and unforgettable.</p>
+          </div>
+        </div>
+        <div class="activity-item reveal">
+          <div class="activity-icon">🌅</div>
+          <div class="activity-text">
+            <h3>Sunset Cruise</h3>
+            <p>A romantic sunset cruise around the bay would be absolutely unforgettable. The sky turns shades of orange and pink as the city lights come alive.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAVEL TIPS -->
+  <section id="tips">
+    <div class="section-inner">
+      <p class="section-label reveal">Practical Guide</p>
+      <h2 class="section-title reveal">Travel Tips</h2>
+      <div class="divider reveal"></div>
+      <p class="reveal">Here are some essential tips to make the most of your visit to Cartagena:</p>
+
+      <div class="tips-grid">
+        <div class="tip-card reveal">
+          <div class="tip-title">☀️ Sun Protection</div>
+          <p class="tip-body">You should always carry sunscreen and a hat because the Caribbean sun can be very intense, even on cloudy days.</p>
+        </div>
+        <div class="tip-card reveal">
+          <div class="tip-title">💧 Stay Hydrated</div>
+          <p class="tip-body">You must drink plenty of water to stay hydrated in the hot, humid weather. Carry a reusable bottle everywhere you go.</p>
+        </div>
+        <div class="tip-card reveal">
+          <div class="tip-title">💵 Carry Cash</div>
+          <p class="tip-body">It is advisable to bring cash in Colombian pesos, as some small shops and street vendors do not accept credit cards.</p>
+        </div>
+        <div class="tip-card reveal">
+          <div class="tip-title">📅 Book in Advance</div>
+          <p class="tip-body">You should book your accommodations early, especially during peak tourist season when hotels fill up fast.</p>
+        </div>
+        <div class="tip-card reveal">
+          <div class="tip-title">🧭 Hire a Local Guide</div>
+          <p class="tip-body">If possible, you could hire a local guide who can show you hidden gems and take you off the beaten track.</p>
+        </div>
+        <div class="tip-card reveal">
+          <div class="tip-title">🛡️ Travel Insurance</div>
+          <p class="tip-body">You ought to get travel insurance before your trip to cover any unexpected situations or medical emergencies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Colombia Travel Bucket List &nbsp;✦&nbsp; <span>Cartagena de Indias</span> &nbsp;✦&nbsp; English B1 · UNAD · 2026</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
